@@ -1,10 +1,15 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ReelController : MonoBehaviour
 {
     float[] YPos;
-    Animator an;
+    public int index;
+    [SerializeField] private Animator an;
+    [SerializeField] private float AnimationDuration;
+
+    public bool spinningfinish = false;
 
     private void Start()
     {
@@ -26,46 +31,55 @@ public class ReelController : MonoBehaviour
 
     void GetRandomPos()
     {
+        spinningfinish = false;
+        an.enabled = true;
         StartCoroutine(Getting());
-;    }
+;   }
 
     IEnumerator Getting()
     {
-        an = GetComponent<Animator>();
+        // Animation
         an.SetBool("isTrigger" , true);
-
-        yield return new WaitForSeconds(3);
-
+        yield return new WaitForSeconds(AnimationDuration);
         an.SetBool("isTrigger", false);
         an.enabled = false;
-        int index = RandomnumberGenerator.instance.GetRandomIndex(4);
+
+        index = RandomnumberGenerator.instance.GetRandomIndex(4);
         float pos = YPos[index];
 
-        float duration = 0.5f;
+        // child reference . the one who has animator
+        Transform child = transform.GetChild(0);
+
+        // reel down 0.1f 
+        float duration = 0.25f;
         float elapsed = 0;
         while(elapsed < duration)
         {
             elapsed += Time.deltaTime;
-            transform.position = Vector3.Lerp(
-                transform.position, 
-                new Vector3(transform.position.x, pos - 0.2f, transform.position.z), 
+            child.position = Vector3.Lerp(
+                child.position, 
+                new Vector3(child.position.x, pos - 0.1f, child.position.z), 
                 elapsed / duration
                 );
             
             yield return null;
         }
+
+        // reel up 0.1f
         elapsed = 0;
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
-            transform.position = Vector3.Lerp(
-                transform.position,
-                new Vector3(transform.position.x, pos, transform.position.z),
+            child.position = Vector3.Lerp(
+                child.position,
+                new Vector3(child.position.x, pos, child.position.z),
                 elapsed / duration
                 );
 
             yield return null;
         }
+
+        spinningfinish = true;
 
     }
 }
