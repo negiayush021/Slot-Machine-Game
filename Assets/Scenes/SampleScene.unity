@@ -478,7 +478,7 @@ MonoBehaviour:
   - {fileID: 1334189726}
   - {fileID: 891020228}
   - {fileID: 1952339333}
-  hasEvaluated: 0
+  hasEvaluated: 1
   credits_txt: {fileID: 1902775016}
   Bet_txt: {fileID: 633387171}
   Betbtn: {fileID: 1210366217}
@@ -3685,7 +3685,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -4705,5 +4705,5 @@ SceneRoots:
   - {fileID: 787363267}
   - {fileID: 496830915}
   - {fileID: 1839411533}
-  - {fileID: 1739697559}
   - {fileID: 675023850}
+  - {fileID: 1739697559}

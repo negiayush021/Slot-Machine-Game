@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Sprite BetbtnDisableIMG;
     [SerializeField] private Sprite BetbtnNormalIMG;
 
-    [SerializeField] private GameObject CelebrationParticles;
+    [SerializeField] private GameObject CelebrationParticles; // when u win jackpot
 
     
     
@@ -34,7 +34,6 @@ public class GameManager : MonoBehaviour
 
         if (!hasEvaluated)
         {
-            AudioManager.instance.PlayClip(2);
             bool allfinished = true;
             foreach (var controller in controllers)
             {
@@ -72,7 +71,6 @@ public class GameManager : MonoBehaviour
         else
         {
             // no match
-            Debug.Log("No match");
             HandleScript.instance.HandleButton.interactable = true;
             NormalBetBtn();
         }
